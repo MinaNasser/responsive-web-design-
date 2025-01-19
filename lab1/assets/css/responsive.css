@@ -1,0 +1,142 @@
+.links, .nav-btns {
+    display: none; /* إخفاء القائمة والأزرار افتراضياً */
+    flex-direction: column; /* ترتيب العناصر عمودياً */
+    gap: 10px;
+    background-color: var(--second-color, #f4f4f4);
+    padding: 10px;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    border-radius: 5px;
+    width: 80%;
+    z-index: 100;
+}
+
+.nav-toggler {
+    display: block; /* إظهار زر القائمة */
+    cursor: pointer;
+}
+
+.toggler-open .links{
+    display: flex; /* عرض القائمة عند الضغط على زر القائمة */
+}
+.toggler-open .nav-btns {
+    display: flex; /* عرض القائمة عند الضغط على زر القائمة */
+}
+
+
+/* تحويل تخطيط المقالات والمدونات */
+.catalog .container {
+    display: grid;
+    grid-template-columns: 1fr ; /* عرض واحد */
+    gap: 20px;
+}
+
+
+.catalog .catalog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.catalog .side-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.catalog .side-articles .side-article {
+    display: flex; /* لتسهيل تنظيم الصور إن كانت ضمن مجموعة */
+    gap: 10px; /* مسافة بين الصور */
+
+}
+.catalog .side-articles .side-article img {
+    width: 30%; 
+ 
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    
+}
+
+
+
+/* تعديل الشبكة للمدونات الأخيرة */
+.latest-blog .container .blog-cards {
+    grid-template-columns: repeat(2, 1fr); /* عرض عمودين */
+    gap: 20px;
+}
+
+.latest-blog .container .blog-cards .blog-card {
+    flex-direction: column; /* ترتيب نصوص المدونة تحت الصور */
+}
+
+/* المساحة الزرقاء */
+.blue-space .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.blue-space .blue-btns {
+    flex-direction: column;
+    width: 100%;
+}
+
+.blue-space .blue-btns button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* المساحة الزرقاء السفلية */
+.blue-container .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+
+.blue-container .blue-btns {
+    flex-direction: column;
+    width: 100%;
+}
+.blue-container .container .blue-btns .extra-btn{
+    display: inline;
+    background-color: #437EF7;
+    color: #ffffff;
+
+}
+.blue-container .container .blue-text h1{
+    font-size: 30px;
+}
+
+/* الفوتر */
+footer {
+    text-align: center;
+    padding: 20px;
+}
+footer .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 20px;
+}
+footer .footer-container .footer-brand  {
+    align-items: left;
+    text-align: left;
+    gap: 10px;
+}
+footer .footer-container .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.nav-active .links,
+.nav-active .nav-btns {
+    display: flex;
+    flex-direction: column; /* ترتيب القوائم عمودياً */
+    gap: 10px; /* مسافة بين العناصر */
+}
