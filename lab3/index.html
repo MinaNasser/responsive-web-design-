@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 3</title>
+    <title>Photo</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
     <!-- <link rel="stylesheet" href="assets/css/bootstrap.css"> -->
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
 </head>
 
 <body>
@@ -51,58 +52,72 @@
         </nav>
     </header>
     <!-- hero section with Bootstrap -->
-    <section class="container-fluid w-100 h-100 d-flex align-items-center justify-content-center">
-        <div class="row position-relative text-center" id="carouselContainer" style="height: 100vh;">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <ul class="carousel-indicators">
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-                </ul>
-                <div class="carousel-inner " style="height: 100%;">
-                    <!-- الشريحة الأولى -->
-                    <div class="carousel-item active" style="height: 100%;">
-                        <img class="d-block w-100" src="assets/images/Rectangle.png" alt="First slide" style="height: 100%; object-fit: cover;">
+    <section class="hero-section d-flex align-items-center justify-content-center">>
+            <div class=" position-relative text-center" id="carouselContainer">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <ul class="carousel-indicators">
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
+                    </ul>
+                    <div class="carousel-inner w-100 h-100 lg-w-100 md-w-75 md-h-75">
+                        <!-- الشريحة الأولى -->
+                        <div class="carousel-item active w-100 h-100" >
+                            <img class="d-block w-100" src="assets/images/PC.jpg" alt="First slide"
+                                style=" object-fit: cover;">
+                        </div>
+                        <!-- الشريحة الثانية -->
+                        <div class="carousel-item w-100 h-100 ">
+                            <img class="d-block w-100 h-100" src="assets/images/pc2.jpg" alt="Second slide"
+                                style=" object-fit: cover;">
+                        </div>
+                        <!-- الشريحة الثالثة -->
+                        <div class="carousel-item h-100">
+                            <img class="d-block w-100 h-100" src="assets/images/pc3.jpg" alt="Third slide"
+                                style="object-fit: cover;">
+                        </div>
+                        <div class="carousel-item" style="height: 100%;">
+                            <img class="d-block w-100 h-100" src="assets/images/pc4.jpg" alt="fhorth slide"
+                                style=" object-fit: cover;">
+                        </div>
                     </div>
-                    <!-- الشريحة الثانية -->
-                    <div class="carousel-item" style="height: 100%;">
-                        <img class="d-block w-100" src="assets/images/Rectangle (2).png" alt="Second slide" style="height: 100%; object-fit: cover;">
-                    </div>
-                    <!-- الشريحة الثالثة -->
-                    <div class="carousel-item" style="height: 100%;">
-                        <img class="d-block w-100" src="assets/images/Container.png" alt="Third slide" style="height: 100%; object-fit: cover;">
+                    <!-- الأسهم السابقة -->
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon  bg-primary text-danger" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <!-- الأسهم التالية -->
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-primary text-danger" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+
+                <!-- الزر داخل المنتصف لفتح Modal -->
+                <div class="position-absolute top-50 start-50 translate-middle text-white">
+                    <div class="d-flex flex-column align-items-center">
+                        <button id="play"
+                            class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
+                            style="width: 4rem; height: 4rem; border-radius: 50%; position: absolute;"
+                            data-bs-toggle="modal" data-bs-target="#videoModal">
+                            <i class="fa fa-play align-self-center"></i>
+                        </button>
                     </div>
                 </div>
-                <!-- الأسهم السابقة -->
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <!-- الأسهم التالية -->
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
-            </div>
-    
-            <!-- الزر داخل المنتصف لفتح Modal -->
-            <div class="position-absolute top-50 start-50 translate-middle text-white">
-                <div class="d-flex flex-column align-items-center">
-                    <button id="play" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
-                            style="width: 4rem; height: 4rem; border-radius: 50%; position: absolute;" data-bs-toggle="modal" data-bs-target="#videoModal">
-                        <i class="fa fa-play align-self-center"></i>
-                    </button>
+
+                <!-- النص والزر في أسفل الصفحة -->
+                <div
+                    class="d-flex flex-column text-white position-absolute bottom-0 start-50 translate-middle-x mb-5 align-items-center justify-content-center">
+                    <p class="fs-6 mb-5  p-2 rounded  bg-primary text-white">The largest community of photo enthusiasts</p>
+                    <button class="btn btn-primary m-lg-4">Join Today</button>
                 </div>
             </div>
-    
-            <!-- النص والزر في أسفل الصفحة -->
-            <div class="d-flex flex-column text-white position-absolute bottom-0 start-50 translate-middle-x mb-5 align-items-center justify-content-center">
-                <p class="fs-6 mb-5">The largest community of photo enthusiasts</p>
-                <button class="btn btn-primary m-lg-4">Join Today</button>
-            </div>
-        </div>
+
     </section>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -114,15 +129,16 @@
                 <div class="modal-body">
                     <div class="embed-responsive embed-responsive-16by9">
                         <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=dPpsNuR-5zg" allowfullscreen></iframe> -->
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dPpsNuR-5zg" title="3- عمل صفحات الداشبورد الداخلية ونبدا بالمخازن- مشروع أنظمة متعددة  لارافيل php laravel ERB #laravel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="100%" height="600" src="https://www.youtube.com/embed/pHThhgNozAc"
+                            title="Professional Web Developer - Build Your Dream Website with  Mina Nasser"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-
-
     <!-- section 2 -->
     <section class="container">
         <div class="row my-3">
