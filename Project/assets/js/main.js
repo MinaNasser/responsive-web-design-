@@ -1,53 +1,143 @@
+
+// https://api.escuelajs.co/api/v1/products
+// Function to fetch products from API https://fakestoreapi.com/products
 // Function to fetch products from the API
 async function fetchProducts() {
   try {
-    const response = await fetch('/api/products');
-    const products = await response.json();
-    return products;
+    const response = await fetch("https://dummyjson.com/products");
+    const data = await response.json();
+    return data.products; // Ensure that you're accessing the 'products' key
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return [];
   }
 }
 
 // Function to render products on the home page
-function renderProducts(products) {
-  const productsContainer = document.getElementById('products');
-  productsContainer.innerHTML = '';
 
-  products.forEach(product => {
-    const productElement = document.createElement('div');
-    productElement.className = 'bg-white p-4 rounded-lg shadow-md';
-    productElement.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover mb-4">
-      <h2 class="text-xl font-bold mb-2">${product.name}</h2>
-      <p class="text-gray-600 mb-2">$${product.price.toFixed(2)}</p>
-      <a href="/product-details.html?id=${product.id}" class="btn btn-primary">View Details</a>
-    `;
-    productsContainer.appendChild(productElement);
-  });
+
+async function renderProducts() {
+  const products = await fetchProducts();
+  const productsContainer = document.getElementById("products");
+  productsContainer.innerHTML = ""; // Clear previous content
+
+  // Check if there are products
+  if (products && products.length > 0) {
+    products.forEach((product) => {
+      const productElement = document.createElement("div");
+      productElement.classList.add(
+      "tw-bg-white",
+        "tw-p-4",
+        "tw-rounded-lg",
+        "tw-shadow-md",
+        "tw-mb-4",
+        "tw-flex",
+        "tw-flex-col",
+        "tw-items-center",
+        "tw-justify-center",
+        "tw-text-center"
+        
+      );
+
+      // Check if there is an image
+      let imagesHTML = "";
+      if (product.images && product.images.length > 0) {
+        imagesHTML = `<img src="${product.images[0]}" alt="${product.title}" class="tw-w-full tw-h-64 tw-rounded-lg tw-object-cover tw-overflow-hidden tw-border tw-mb-4">`; // Take the first image
+      } else {
+        imagesHTML = `<p>No images available.</p>`;
+      }
+
+      // Calculate stars for rating
+      const stars = Math.round(product.rating); // Round to the nearest integer
+      let starsHTML = "";
+      for (let i = 0; i < 5; i++) {
+        if (i < stars) {
+          starsHTML += `<span class="text-yellow-400">★</span>`; // Full stars
+        } else {
+          starsHTML += `<span class="text-gray-300">★</span>`; // Empty stars
+        }
+      }
+
+      // Set the product HTML
+      productElement.innerHTML = `
+        <a href="../pages/product-details.html?id=${product.id}">
+          <div class="tw-flex tw-flex-col tw-items-center">
+            ${imagesHTML}
+          </div>
+          <div class="tw-mt-8 tw-text-center">
+            <h4 class="tw-font-bold tw-text-xl">${product.title}</h4>
+            <p class="tw-mt-2 tw-text-gray-600">$${product.price}</p>
+            <div class="tw-mt-2 tw-text-gray-600">
+              ${starsHTML} <!-- Display stars here -->
+            </div>
+            <div class="tw-mt-5">
+              <button type="button" class="tw-inline-flex tw-items-center tw-rounded-md tw-border tw-border-transparent tw-bg-gray-800 tw-px-3 tw-py-2 tw-text-sm tw-font-medium tw-leading-4 tw-text-white tw-shadow-sm hover:tw-bg-gray-900">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </a>
+      `;
+
+      // Append the product to the container
+      productsContainer.appendChild(productElement);
+    });
+  } else {
+    productsContainer.innerHTML = "<p>No products found.</p>";
+  }
 }
+
+// Call the renderProducts function to display the products
+renderProducts();
 
 // Function to render product details
-function renderProductDetails(product) {
-  const productDetailsContainer = document.getElementById("product-details");
-  productDetailsContainer.innerHTML = `
-    <div class="flex flex-col md:flex-row">
-      <img src="${product.image}" alt="${product.name}" class="w-full md:w-1/2 h-64 object-cover mb-4 md:mb-0 md:mr-6">
-      <div>
-        <h2 class="text-2xl font-bold mb-2">${product.name}</h2>
-        <p class="text-gray-600 mb-4">$${product.price.toFixed(2)}</p>
-        <p class="mb-4">${product.description}</p>
-        <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
-      </div>
-    </div>
-  `;
+async function renderProductDetails(productId) {
+  const products = await fetchProducts();
+  const product = products.find((p) => p.id === parseInt(productId));
 
-  // Add event listener for the "Add to Cart" button
-  document.getElementById("add-to-cart").addEventListener("click", () => addToCart(product));
+  if (product) {
+    const productDetailsContainer = document.getElementById("product-details");
+
+    // Calculate stars for rating
+    const stars = Math.round(product.rating); // Round to the nearest integer
+    let starsHTML = "";
+    for (let i = 0; i < 5; i++) {
+      if (i < stars) {
+        starsHTML += `<span class="text-yellow-400">★</span>`; // Full stars
+      } else {
+        starsHTML += `<span class="text-gray-300">★</span>`; // Empty stars
+      }
+    }
+
+    // Set the product details HTML
+    productDetailsContainer.innerHTML = `
+      <div class="flex flex-col md:flex-row">
+        <img src="${product.images[0]}" alt="${product.title}" class="w-full md:w-1/2 h-64 object-cover mb-4 md:mb-0 md:mr-6">
+        <div>
+          <h2 class="text-2xl font-bold mb-2">${product.title}</h2>
+          <p class="text-gray-600 mb-4">$${product.price}</p>
+          <p class="mb-4">${product.description}</p>
+
+          <!-- Display rating stars -->
+          <div class="mb-4">
+            <span class="text-gray-600">Rating: </span>
+            ${starsHTML}
+            <span class="text-gray-600">(${product.reviews.length} reviews)</span>
+          </div>
+
+          <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    `;
+
+    // Add event listener for the "Add to Cart" button
+    document
+      .getElementById("add-to-cart")
+      .addEventListener("click", () => addToCart(product));
+  }
 }
 
-// Function to add a product to the cart
+// Function to handle adding product to cart
 function addToCart(product) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItem = cart.find((item) => item.id === product.id);
@@ -63,49 +153,75 @@ function addToCart(product) {
 }
 
 // Function to render cart items
-function renderCart() {
+async function renderCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartItemsContainer = document.getElementById("cart-items");
   const cartTotal = document.getElementById("cart-total");
 
-  cartItemsContainer.innerHTML = '';
+  cartItemsContainer.innerHTML = ""; // Reset previous content
   let total = 0;
 
-  cart.forEach((item) => {
-    const itemElement = document.createElement("div");
-    itemElement.className = "flex items-center justify-between border-b py-4";
-    itemElement.innerHTML = `
-      <div class="flex items-center">
-        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover mr-4">
-        <div>
-          <h3 class="font-bold">${item.name}</h3>
-          <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `<p>Your cart is empty.</p>`;
+  } else {
+    // Display each cart item
+    cart.forEach((item) => {
+      const itemElement = document.createElement("div");
+      itemElement.className = "flex items-center justify-between border-b py-4";
+      itemElement.innerHTML = `
+        <div class="flex items-center">
+          <img 
+          src="${item.images[0]}" 
+          alt="${item.name}" 
+          class="img-fluid d-block rounded border shadow-sm bg-light" 
+          style="width: 64px; height: 64px; object-fit: cover;"
+        />
+
+
+          <div>
+            <h3 class="font-bold">${item.name}</h3>
+            <p>$${item.price.toFixed(2)} x ${item.quantity}</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <button class="btn btn-sm btn-outline-danger remove-item" data-id="${item.id}">Remove</button>
-      </div>
-    `;
-    cartItemsContainer.appendChild(itemElement);
+        <div>
+          <button class="btn btn-sm btn-outline-danger remove-item" data-id="${
+            item.id
+          }">Remove</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(itemElement);
 
-    total += item.price * item.quantity;
-  });
+      total += item.price * item.quantity;
+    });
+  }
 
+  // Display the total price
   cartTotal.textContent = total.toFixed(2);
 
   // Add event listeners for remove buttons
   document.querySelectorAll(".remove-item").forEach((button) => {
-    button.addEventListener("click", (e) => removeFromCart(e.target.dataset.id));
+    button.addEventListener("click", (e) =>
+      removeFromCart(e.target.dataset.id)
+    );
   });
 }
 
 // Function to remove an item from the cart
-function removeFromCart(productId) {
+async function removeFromCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Remove the product from the cart by ID
   cart = cart.filter((item) => item.id !== productId);
+
+  // Save the updated cart to localStorage
   localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Reload the cart after modification
   renderCart();
 }
+
+// Call the renderCart function to display cart items
+renderCart();
 
 // Function to handle form submission
 function handleFormSubmit(formId, submitFunction) {
@@ -207,23 +323,25 @@ async function initPage() {
   if (path === "/" || path === "../../index.html") {
     const products = await fetchProducts();
     renderProducts(products);
-  } else if (path === "/product-details.html") {
+  } else if (path === "../pages/p1roduct-details.html") {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
-    const product = await fetchProducts().then((products) => products.find((p) => p.id === productId));
+    const product = await fetchProducts().then((products) =>
+      products.find((p) => p.id === productId)
+    );
     if (product) {
       renderProductDetails(product);
     } else {
       alert("Product not found");
     }
-  } else if (path === "/cart.html") {
+  } else if (path === "../pages/cart.html") {
     renderCart();
-  } else if (path === "/checkout.html") {
+  } else if (path === "../pages/checkout.html") {
     renderCart();
     handleFormSubmit("checkout-form", handleCheckout);
-  } else if (path === "/login.html") {
+  } else if (path === "../pages/login.html") {
     handleFormSubmit("login-form", handleLogin);
-  } else if (path === "/register.html") {
+  } else if (path === "../pages/register.html") {
     handleFormSubmit("register-form", handleRegister);
   }
 }

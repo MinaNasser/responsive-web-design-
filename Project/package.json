@@ -1,13 +1,10 @@
 {
   "name": "ecommerce-website",
   "version": "1.0.0",
-  "description": "E-commerce website with Node.js, Express, and MySQL",
   "main": "server.js",
   "scripts": {
     "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css",
-    "watch": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "watch": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch"
   },
   "keywords": [],
   "author": "",

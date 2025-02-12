@@ -12,8 +12,8 @@ module.exports = {
     './index.html', // ملف HTML في المسار الجذري
     './assets/**/*.{js,jsx,ts,tsx}', // جميع ملفات JavaScript/TypeScript داخل assets
     './assets/css/**/*.css', // جميع ملفات CSS داخل مجلد CSS
-    './components/**/*.{html,js}', // إذا كنت تستخدم مكونات (Components)
     './assets/pages/**/*.{html,js}', // إذا كان لديك صفحات متعددة
+    './assets/pages/*.{html,js}', // إذا كان لديك صفحات متعددة
     './assets/js/**/*.js',
   ],
   prefix: "tw-", // إضافة بادئة لكلاسات Tailwind
